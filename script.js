@@ -80,7 +80,7 @@ const quizData = [
 let current = 0;
 let score = 0;
 
-// 🔀 Función para mezclar arrays (Fisher-Yates)
+// 🔀 Mezclar (Fisher-Yates)
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -89,14 +89,13 @@ function shuffle(array) {
   return array;
 }
 
-// 🔀 Mezclar preguntas al inicio
+// 🔀 Mezclar preguntas al iniciar
 shuffle(quizData);
 
 function loadQuestion() {
   const q = quizData[current];
   const quiz = document.getElementById("quiz");
 
-  // 🔀 Mezclar opciones sin perder la correcta
   const opcionesMezcladas = shuffle([...q.opciones]);
 
   quiz.innerHTML = `
@@ -125,7 +124,5 @@ function selectAnswer(answer) {
       "Puntaje final: " + score + "/" + quizData.length;
   }
 }
-
-loadQuestion();
 
 loadQuestion();
