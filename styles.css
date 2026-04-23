@@ -4,19 +4,20 @@ body {
   color: white;
   text-align: center;
   margin: 0;
-  padding: 0;
 }
 
 .container {
   max-width: 600px;
-  margin: 50px auto;
+  margin: 40px auto;
   background: rgba(0,0,0,0.6);
   padding: 20px;
   border-radius: 15px;
 }
 
-h1 {
-  margin-bottom: 20px;
+#progress {
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #ccc;
 }
 
 button {
@@ -30,6 +31,7 @@ button {
   color: black;
   font-size: 16px;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 button:hover {
