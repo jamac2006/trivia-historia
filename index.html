@@ -2,22 +2,27 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Trivia Kahoot</title>
+  <title>Trivia Pro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="app">
-  <div class="top-bar">
-    <span id="progress">0/0</span>
-    <span id="timer">⏱️</span>
+
+  <div class="header">
+    <div id="progress">0/0</div>
+    <div id="timer">⏱️ 10</div>
   </div>
 
-  <div id="quiz">Cargando...</div>
+  <div class="card" id="quiz">
+    Cargando...
+  </div>
+
   <div id="result"></div>
+
 </div>
 
 <script src="script.js"></script>
-
 </body>
 </html>
