@@ -1,10 +1,4 @@
 const quizData = [
-  {
-    pregunta: "¿En qué año comenzó la Segunda Guerra Mundial?",
-    opciones: ["1939","1914","1945","1929"],
-    respuesta: "1939"
-  },
-  [
 {"pregunta":"¿En qué año comenzó la Segunda Guerra Mundial?","opciones":["1939","1914","1945","1929"],"respuesta":"1939"},
 {"pregunta":"¿Quién descubrió América en 1492?","opciones":["Cristóbal Colón","Américo Vespucio","Hernán Cortés","Simón Bolívar"],"respuesta":"Cristóbal Colón"},
 {"pregunta":"¿Qué civilización construyó las pirámides de Giza?","opciones":["Egipcia","Romana","Griega","Maya"],"respuesta":"Egipcia"},
@@ -79,9 +73,8 @@ const quizData = [
 {"pregunta":"¿Quién fue Marco Polo?","opciones":["Explorador","Rey","General","Filósofo"],"respuesta":"Explorador"},
 {"pregunta":"¿Qué imperio dominó gran parte de Europa medieval?","opciones":["Romano","Otomano","Mongol","Inca"],"respuesta":"Romano"},
 {"pregunta":"¿Qué cultura estaba en Mesopotamia?","opciones":["Sumeria","Inca","Maya","Azteca"],"respuesta":"Sumeria"},
-{"pregunta":"¿Quién fue Napoleón derrotado en Waterloo?","opciones":["Sí","No","Parcialmente","No participó"],"respuesta":"Sí"},
+{"pregunta":"¿Napoleón fue derrotado en Waterloo?","opciones":["Sí","No","Parcialmente","No participó"],"respuesta":"Sí"},
 {"pregunta":"¿Qué país era aliado de EE.UU. en WWII?","opciones":["Reino Unido","Alemania","Japón","Italia"],"respuesta":"Reino Unido"}
-]
 ];
 
 let current = 0;
@@ -100,8 +93,6 @@ function loadQuestion() {
 }
 
 function selectAnswer(answer) {
-  const buttons = document.querySelectorAll("button");
-
   if (answer === quizData[current].respuesta) {
     score++;
     alert("✅ Correcto");
