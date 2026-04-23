@@ -1,43 +1,38 @@
-const quizData = [
-  {
-    pregunta: "¿En qué año comenzó la Segunda Guerra Mundial?",
-    opciones: ["1939","1914","1945","1929"],
-    respuesta: "1939"
-  },
-  {
-    pregunta: "¿Quién descubrió América?",
-    opciones: ["Cristóbal Colón","Magallanes","Napoleón","Bolívar"],
-    respuesta: "Cristóbal Colón"
-  }
-];
-
-let current = 0;
-let score = 0;
-
-function loadQuestion() {
-  const q = quizData[current];
-  const quiz = document.getElementById("quiz");
-
-  quiz.innerHTML = `
-    <h2>${q.pregunta}</h2>
-    ${q.opciones.map(op => `
-      <button onclick="selectAnswer('${op}')">${op}</button>
-    `).join("")}
-  `;
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: white;
+  text-align: center;
+  margin: 0;
+  padding: 0;
 }
 
-function selectAnswer(answer) {
-  if (answer === quizData[current].respuesta) {
-    score++;
-  }
-  current++;
-
-  if (current < quizData.length) {
-    loadQuestion();
-  } else {
-    document.getElementById("quiz").innerHTML = "Fin del juego";
-    document.getElementById("score").innerText = "Puntaje: " + score;
-  }
+.container {
+  max-width: 600px;
+  margin: 50px auto;
+  background: rgba(0,0,0,0.6);
+  padding: 20px;
+  border-radius: 15px;
 }
 
-loadQuestion();
+h1 {
+  margin-bottom: 20px;
+}
+
+button {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #00c6ff;
+  color: black;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0072ff;
+  color: white;
+}
