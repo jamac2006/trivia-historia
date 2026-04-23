@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Trivia</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trivia de Historia</title>
 
-<style>
-body {
-  background: black;
-  color: white;
-  text-align: center;
-}
-</style>
-
+  <!-- ✅ Conexión al CSS -->
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
-<h1>Trivia</h1>
-<div id="quiz"></div>
+  <div class="container">
+    <h1>🧠 Trivia de Historia</h1>
 
-<script>
-document.getElementById("quiz").innerHTML = "FUNCIONA JS";
-</script>
+    <!-- Aquí se cargan las preguntas -->
+    <div id="quiz"></div>
+
+    <!-- Puntaje final -->
+    <h2 id="score"></h2>
+  </div>
+
+  <!-- ✅ Script SIEMPRE al final -->
+  <script src="./script.js"></script>
 
 </body>
 </html>
