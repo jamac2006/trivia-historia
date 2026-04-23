@@ -89,7 +89,7 @@ function shuffle(array) {
   return array;
 }
 
-// 🔀 Mezclar preguntas al iniciar
+// Mezclar preguntas al iniciar
 shuffle(quizData);
 
 function loadQuestion() {
@@ -101,27 +101,43 @@ function loadQuestion() {
   quiz.innerHTML = `
     <h2>${q.pregunta}</h2>
     ${opcionesMezcladas.map(op => `
-      <button onclick="selectAnswer('${op}')">${op}</button>
+      <button class="option">${op}</button>
     `).join("")}
   `;
+
+  // Agregar eventos a botones
+  document.querySelectorAll(".option").forEach(btn => {
+    btn.addEventListener("click", () => selectAnswer(btn));
+  });
 }
 
-function selectAnswer(answer) {
- 
-document.getElementById("score").innerText = 
-  answer === quizData[current].respuesta 
-  ? "✅ Correcto" 
-  : "❌ Incorrecto";
-  
-  current++;
+function selectAnswer(button) {
+  const correct = quizData[current].respuesta;
+  const buttons = document.querySelectorAll(".option");
 
-  if (current < quizData.length) {
-    loadQuestion();
-  } else {
-    document.getElementById("quiz").innerHTML = "🎉 Fin del juego";
-    document.getElementById("score").innerText =
-      "Puntaje final: " + score + "/" + quizData.length;
+  buttons.forEach(btn => {
+    if (btn.innerText === correct) {
+      btn.style.background = "green";
+    } else {
+      btn.style.background = "red";
+    }
+    btn.disabled = true;
+  });
+
+  if (button.innerText === correct) {
+    score++;
   }
+
+  setTimeout(() => {
+    current++;
+    if (current < quizData.length) {
+      loadQuestion();
+    } else {
+      document.getElementById("quiz").innerHTML = "🎉 Fin del juego";
+      document.getElementById("score").innerText =
+        "Puntaje final: " + score + "/" + quizData.length;
+    }
+  }, 1000);
 }
 
 loadQuestion();
