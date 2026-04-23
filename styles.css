@@ -1,17 +1,89 @@
-body {
-  font-family: Arial;
-  background: #111;
-  color: white;
-  text-align: center;
+const quizData = [
+  {
+    pregunta: "¿En qué año comenzó la Segunda Guerra Mundial?",
+    opciones: ["1939","1914","1945","1929"],
+    respuesta: "1939"
+  },
+  {
+    pregunta: "¿Quién descubrió América?",
+    opciones: ["Cristóbal Colón","Napoleón","Bolívar","Magallanes"],
+    respuesta: "Cristóbal Colón"
+  },
+  {
+    pregunta: "¿Qué civilización construyó las pirámides de Egipto?",
+    opciones: ["Egipcia","Romana","Griega","Maya"],
+    respuesta: "Egipcia"
+  },
+  {
+    pregunta: "¿Quién fue el primer emperador romano?",
+    opciones: ["Augusto","Julio César","Nerón","Trajano"],
+    respuesta: "Augusto"
+  },
+  {
+    pregunta: "¿Qué muro cayó en 1989?",
+    opciones: ["Muro de Berlín","Muralla China","Muro de Adriano","Troya"],
+    respuesta: "Muro de Berlín"
+  },
+  {
+    pregunta: "¿Quién lideró la independencia de Chile?",
+    opciones: ["Bernardo O’Higgins","Arturo Prat","Diego Portales","Allende"],
+    respuesta: "Bernardo O’Higgins"
+  },
+  {
+    pregunta: "¿Qué imperio dominó gran parte de Sudamérica?",
+    opciones: ["Inca","Azteca","Maya","Romano"],
+    respuesta: "Inca"
+  },
+  {
+    pregunta: "¿Qué revolución ocurrió en Francia en 1789?",
+    opciones: ["Revolución Francesa","Industrial","Rusa","Americana"],
+    respuesta: "Revolución Francesa"
+  },
+  {
+    pregunta: "¿Quién fue Mahatma Gandhi?",
+    opciones: ["Líder pacifista","General","Rey","Explorador"],
+    respuesta: "Líder pacifista"
+  },
+  {
+    pregunta: "¿Qué guerra fue entre 1914 y 1918?",
+    opciones: ["Primera Guerra Mundial","Segunda","Vietnam","Corea"],
+    respuesta: "Primera Guerra Mundial"
+  }
+];
+
+let current = 0;
+let score = 0;
+
+function loadQuestion() {
+  const q = quizData[current];
+  const quiz = document.getElementById("quiz");
+
+  quiz.innerHTML = `
+    <h2>${q.pregunta}</h2>
+    ${q.opciones.map(op => `
+      <button onclick="selectAnswer('${op}')">${op}</button>
+    `).join("")}
+  `;
 }
 
-.container {
-  max-width: 500px;
-  margin: auto;
+function selectAnswer(answer) {
+  const buttons = document.querySelectorAll("button");
+
+  if (answer === quizData[current].respuesta) {
+    score++;
+    alert("✅ Correcto");
+  } else {
+    alert("❌ Incorrecto\nRespuesta correcta: " + quizData[current].respuesta);
+  }
+
+  current++;
+
+  if (current < quizData.length) {
+    loadQuestion();
+  } else {
+    document.getElementById("quiz").innerHTML = "🎉 Fin del juego";
+    document.getElementById("score").innerText = "Puntaje final: " + score + "/" + quizData.length;
+  }
 }
 
-button {
-  margin: 10px;
-  padding: 10px;
-  cursor: pointer;
-}
+loadQuestion();
