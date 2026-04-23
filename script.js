@@ -107,13 +107,12 @@ function loadQuestion() {
 }
 
 function selectAnswer(answer) {
-  if (answer === quizData[current].respuesta) {
-    score++;
-    alert("✅ Correcto");
-  } else {
-    alert("❌ Incorrecto\nRespuesta correcta: " + quizData[current].respuesta);
-  }
-
+ 
+document.getElementById("score").innerText = 
+  answer === quizData[current].respuesta 
+  ? "✅ Correcto" 
+  : "❌ Incorrecto";
+  
   current++;
 
   if (current < quizData.length) {
