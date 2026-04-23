@@ -80,13 +80,28 @@ const quizData = [
 let current = 0;
 let score = 0;
 
+// 🔀 Función para mezclar arrays (Fisher-Yates)
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+// 🔀 Mezclar preguntas al inicio
+shuffle(quizData);
+
 function loadQuestion() {
   const q = quizData[current];
   const quiz = document.getElementById("quiz");
 
+  // 🔀 Mezclar opciones sin perder la correcta
+  const opcionesMezcladas = shuffle([...q.opciones]);
+
   quiz.innerHTML = `
     <h2>${q.pregunta}</h2>
-    ${q.opciones.map(op => `
+    ${opcionesMezcladas.map(op => `
       <button onclick="selectAnswer('${op}')">${op}</button>
     `).join("")}
   `;
@@ -106,8 +121,11 @@ function selectAnswer(answer) {
     loadQuestion();
   } else {
     document.getElementById("quiz").innerHTML = "🎉 Fin del juego";
-    document.getElementById("score").innerText = "Puntaje final: " + score + "/" + quizData.length;
+    document.getElementById("score").innerText =
+      "Puntaje final: " + score + "/" + quizData.length;
   }
 }
+
+loadQuestion();
 
 loadQuestion();
