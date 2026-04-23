@@ -2,18 +2,25 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trivia de Historia</title>
-<link rel="stylesheet" href="style.css">
+<title>Trivia</title>
+
+<style>
+body {
+  background: black;
+  color: white;
+  text-align: center;
+}
+</style>
+
 </head>
 <body>
 
-<div class="container">
-  <h1>🧠 Trivia de Historia</h1>
-  <div id="quiz"></div>
-  <h2 id="score"></h2>
-</div>
+<h1>Trivia</h1>
+<div id="quiz"></div>
 
-<script src="script.js"></script>
+<script>
+document.getElementById("quiz").innerHTML = "FUNCIONA JS";
+</script>
+
 </body>
 </html>
