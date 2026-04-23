@@ -99,7 +99,9 @@ function loadQuestion() {
   const opcionesMezcladas = shuffle([...q.opciones]);
 
   quiz.innerHTML = `
-    <h2>${q.pregunta}</h2>
+  <h3>Pregunta ${current + 1} de ${quizData.length}</h3>
+  <h2>${q.pregunta}</h2>
+`;
     ${opcionesMezcladas.map(op => `
       <button class="option">${op}</button>
     `).join("")}
