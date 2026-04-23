@@ -1,50 +1,84 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #46178f;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #1f1c2c, #928dab);
   color: white;
 }
 
 .app {
-  max-width: 600px;
+  max-width: 500px;
   margin: auto;
-  padding: 10px;
+  padding: 15px;
 }
 
-.top-bar {
+.header {
   display: flex;
   justify-content: space-between;
-  font-size: 18px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  font-size: 16px;
 }
 
-#quiz h2 {
+.card {
+  background: rgba(255,255,255,0.08);
+  padding: 20px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  transition: 0.3s;
+}
+
+h2 {
   text-align: center;
-  margin-bottom: 20px;
 }
 
 .option {
   width: 100%;
-  padding: 20px;
+  padding: 15px;
   margin: 10px 0;
-  font-size: 18px;
   border: none;
   border-radius: 10px;
+  font-size: 16px;
   color: white;
   cursor: pointer;
+  transition: 0.3s;
 }
 
-.option:nth-child(1) { background: #e21b3c; } /* rojo */
-.option:nth-child(2) { background: #1368ce; } /* azul */
-.option:nth-child(3) { background: #d89e00; } /* amarillo */
-.option:nth-child(4) { background: #26890c; } /* verde */
+/* colores tipo app */
+.option:nth-child(2) { background: #ff4d4d; }
+.option:nth-child(3) { background: #4da6ff; }
+.option:nth-child(4) { background: #ffcc00; }
+.option:nth-child(5) { background: #33cc33; }
+
+.option:hover {
+  transform: scale(1.03);
+}
 
 .option:disabled {
   opacity: 0.6;
+}
+
+.correct {
+  background: #00c853 !important;
+}
+
+.wrong {
+  background: #d50000 !important;
 }
 
 #result {
   text-align: center;
   margin-top: 20px;
   font-size: 20px;
+}
+
+button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  background: #00c6ff;
+  color: black;
+  cursor: pointer;
 }
