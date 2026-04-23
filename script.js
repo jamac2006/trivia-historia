@@ -79,41 +79,59 @@ const quizData = [
 
 let current = 0;
 let score = 0;
+let time = 10;
+let timer;
 
-// 🔀 Mezclar (Fisher-Yates)
+// 🔀 Mezclar
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
-  return array;
 }
 
-// Mezclar preguntas al iniciar
 shuffle(quizData);
 
 function loadQuestion() {
   const q = quizData[current];
   const quiz = document.getElementById("quiz");
 
-  const opcionesMezcladas = shuffle([...q.opciones]);
+  document.getElementById("progress").innerText =
+    `Pregunta ${current + 1} de ${quizData.length}`;
+
+  const opcionesMezcladas = [...q.opciones];
+  shuffle(opcionesMezcladas);
 
   quiz.innerHTML = `
-  <h3>Pregunta ${current + 1} de ${quizData.length}</h3>
-  <h2>${q.pregunta}</h2>
-`;
-    ${opcionesMezcladas.map(op => `
-      <button class="option">${op}</button>
-    `).join("")}
+    <h2>${q.pregunta}</h2>
+    ${opcionesMezcladas.map(op => `<button class="option">${op}</button>`).join("")}
   `;
 
-  // Agregar eventos a botones
   document.querySelectorAll(".option").forEach(btn => {
     btn.addEventListener("click", () => selectAnswer(btn));
   });
+
+  startTimer();
+}
+
+function startTimer() {
+  clearInterval(timer);
+  time = 10;
+
+  timer = setInterval(() => {
+    document.getElementById("info").innerText = "⏱️ Tiempo: " + time;
+    time--;
+
+    if (time < 0) {
+      clearInterval(timer);
+      nextQuestion();
+    }
+  }, 1000);
 }
 
 function selectAnswer(button) {
+  clearInterval(timer);
+
   const correct = quizData[current].respuesta;
   const buttons = document.querySelectorAll(".option");
 
@@ -130,16 +148,22 @@ function selectAnswer(button) {
     score++;
   }
 
-  setTimeout(() => {
-    current++;
-    if (current < quizData.length) {
-      loadQuestion();
-    } else {
-      document.getElementById("quiz").innerHTML = "🎉 Fin del juego";
-      document.getElementById("score").innerText =
-        "Puntaje final: " + score + "/" + quizData.length;
-    }
-  }, 1000);
+  setTimeout(nextQuestion, 1000);
+}
+
+function nextQuestion() {
+  current++;
+
+  if (current < quizData.length) {
+    loadQuestion();
+  } else {
+    document.getElementById("quiz").innerHTML = `
+      <h2>🎉 Fin del juego</h2>
+      <button onclick="location.reload()">Reiniciar</button>
+    `;
+    document.getElementById("info").innerText =
+      "Puntaje final: " + score + "/" + quizData.length;
+  }
 }
 
 loadQuestion();
