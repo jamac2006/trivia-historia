@@ -9,6 +9,7 @@ const quizData = [
     opciones: ["1939","1914","1945","1929"],
     respuesta: "1939"
   }
+  // 👉 agrega aquí tus 100 preguntas
 ];
 
 let current = 0;
@@ -35,14 +36,23 @@ function loadQuestion() {
   const opciones = [...q.opciones];
   shuffle(opciones);
 
-  document.getElementById("quiz").innerHTML = `
-    <h2>${q.pregunta}</h2>
-    ${opciones.map(op => `<button class="option">${op}</button>`).join("")}
-  `;
+  const quiz = document.getElementById("quiz");
 
-  document.querySelectorAll(".option").forEach(btn => {
-    btn.onclick = () => selectAnswer(btn.innerText);
-  });
+  // animación
+  quiz.style.opacity = 0;
+
+  setTimeout(() => {
+    quiz.innerHTML = `
+      <h2>${q.pregunta}</h2>
+      ${opciones.map(op => `<button class="option">${op}</button>`).join("")}
+    `;
+    quiz.style.opacity = 1;
+
+    document.querySelectorAll(".option").forEach(btn => {
+      btn.onclick = () => selectAnswer(btn);
+    });
+
+  }, 200);
 
   startTimer();
 }
@@ -62,7 +72,7 @@ function startTimer() {
   }, 1000);
 }
 
-function selectAnswer(answer) {
+function selectAnswer(button) {
   clearInterval(timer);
 
   const correct = quizData[current].respuesta;
@@ -70,14 +80,16 @@ function selectAnswer(answer) {
 
   buttons.forEach(btn => {
     if (btn.innerText === correct) {
-      btn.style.background = "green";
+      btn.classList.add("correct");
     } else {
-      btn.style.background = "red";
+      btn.classList.add("wrong");
     }
     btn.disabled = true;
   });
 
-  if (answer === correct) score++;
+  if (button.innerText === correct) {
+    score++;
+  }
 
   setTimeout(nextQuestion, 1000);
 }
@@ -89,7 +101,7 @@ function nextQuestion() {
     loadQuestion();
   } else {
     document.getElementById("quiz").innerHTML = `
-      <h2>🎉 Fin del juego</h2>
+      <h2>🎉 Juego terminado</h2>
       <button onclick="location.reload()">Reiniciar</button>
     `;
     document.getElementById("result").innerText =
