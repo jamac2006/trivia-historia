@@ -82,14 +82,13 @@ let score = 0;
 let time = 10;
 let timer;
 
-// 🔀 Mezclar
+// Mezclar preguntas
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
 }
-
 shuffle(quizData);
 
 function loadQuestion() {
@@ -97,14 +96,14 @@ function loadQuestion() {
   const quiz = document.getElementById("quiz");
 
   document.getElementById("progress").innerText =
-    `Pregunta ${current + 1} de ${quizData.length}`;
+    `${current + 1}/${quizData.length}`;
 
-  const opcionesMezcladas = [...q.opciones];
-  shuffle(opcionesMezcladas);
+  const opciones = [...q.opciones];
+  shuffle(opciones);
 
   quiz.innerHTML = `
     <h2>${q.pregunta}</h2>
-    ${opcionesMezcladas.map(op => `<button class="option">${op}</button>`).join("")}
+    ${opciones.map(op => `<button class="option">${op}</button>`).join("")}
   `;
 
   document.querySelectorAll(".option").forEach(btn => {
@@ -119,7 +118,7 @@ function startTimer() {
   time = 10;
 
   timer = setInterval(() => {
-    document.getElementById("info").innerText = "⏱️ Tiempo: " + time;
+    document.getElementById("timer").innerText = "⏱️ " + time;
     time--;
 
     if (time < 0) {
@@ -137,9 +136,9 @@ function selectAnswer(button) {
 
   buttons.forEach(btn => {
     if (btn.innerText === correct) {
-      btn.style.background = "green";
+      btn.style.background = "#00c853";
     } else {
-      btn.style.background = "red";
+      btn.style.background = "#d50000";
     }
     btn.disabled = true;
   });
@@ -161,8 +160,8 @@ function nextQuestion() {
       <h2>🎉 Fin del juego</h2>
       <button onclick="location.reload()">Reiniciar</button>
     `;
-    document.getElementById("info").innerText =
-      "Puntaje final: " + score + "/" + quizData.length;
+    document.getElementById("result").innerText =
+      `Puntaje: ${score}/${quizData.length}`;
   }
 }
 
